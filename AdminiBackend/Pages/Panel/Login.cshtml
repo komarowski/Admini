@@ -1,0 +1,53 @@
+﻿@page
+@model AdminiBackend.Pages.Panel.LoginModel
+@{
+  Layout = "~/Pages/Shared/_EmptyLayout.cshtml";
+}
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Admini Panel</title>
+  <link rel="stylesheet" href="~/admin-assets/icons/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="~/admin-assets/css/style.css">
+</head>
+<body class="w3-light-grey">
+  <div class="w3-panel">
+    <div class="w3-auto" style="width:380px">
+      <div class="w3-white w3-round w3-margin-bottom w3-border">
+        <div class="w3-padding-large">
+          <div class="w3-center w3-padding-16">
+            <img src="~/admin-assets/admin-logo-text.svg" alt="admini-logo" class="w3-image">
+            <h4>Welcome to Admini Panel!</h4>
+          </div>
+
+          <form method="post" asp-page-handler="Login">
+            <div class="w3-margin-bottom">
+              <input asp-for="LoginForm.Name" class="w3-input w3-round w3-border" placeholder="Enter Name" autocomplete="off" minlength="3" maxlength="30" required>
+            </div>
+            <div class="w3-margin-bottom">
+              <input type="password" asp-for="LoginForm.Password" class="w3-input w3-round w3-border" placeholder="Enter Password" minlength="4" maxlength="40" required>
+            </div>
+            <button type="submit" class="w3-button w3-round w3-margin-bottom w3-primary w3-block">Sign In</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    @if (Model.Alert is not null)
+    {
+      <div id="alert" class="w3-modal" style="display: block">
+        <div class="w3-modal-content w3-animate-top w3-card-4 w3-round" style="max-width: 400px;">
+          <header class="w3-container @Model.Alert.Color">
+            <span onclick="document.getElementById('alert').style.display='none'" class="w3-button w3-xlarge w3-display-topright">×</span>
+            <h2>@Model.Alert.Title</h2>
+          </header>
+          <div class="w3-container">
+            <p>@Model.Alert.Text</p>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</body>
+</html>

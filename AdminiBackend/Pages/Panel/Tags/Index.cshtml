@@ -1,0 +1,43 @@
+﻿@page
+@model AdminiBackend.Pages.Panel.Tags.IndexModel
+
+@{
+  ViewData["LayoutViewData"] = new Entities.LayoutViewData("Tags", Entities.AdminPanelPage.TagsPage, Model.Alert);
+}
+
+<div class="w3-white w3-round w3-margin-bottom w3-border">
+  <header class="w3-padding-large w3-large w3-border-bottom">Tags</header>
+  <div class="w3-padding-large">
+    <div class="w3-flex w3-flex-end w3-margin-bottom">
+      <a asp-page="Add" title="Create new tag" class="w3-button w3-primary w3-round">Create</a>
+    </div>
+    <div class="w3-responsive">
+      <table class="w3-table w3-bordered w3-center">
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Title</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var item in Model.TagList)
+          {
+            <tr>
+              <td>@Html.DisplayFor(modelItem => item.Number)</td>
+              <td>@Html.DisplayFor(modelItem => item.Title)</td>
+              <td style="display:flex;justify-content:center;">
+                <a asp-page="./Edit" asp-route-id="@item.Id" title="Edit tag" class="w3-button w3-warning w3-round w3-small w3-margin-right">
+                  <i class="fa fa-fw fa-pencil"></i>
+                </a>
+                <form method="post" asp-route-id="@item.Id" onsubmit="return confirm('Are you sure?');">
+                  <button type="submit" title="Delete" class="w3-button w3-danger w3-round w3-small"><i class="fa fa-fw fa-trash"></i></button>
+                </form>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

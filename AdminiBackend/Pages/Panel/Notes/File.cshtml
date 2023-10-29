@@ -1,0 +1,49 @@
+﻿@page
+@model AdminiBackend.Pages.Panel.Notes.FileModel
+@{
+  ViewData["LayoutViewData"] = new Entities.LayoutViewData("Note files", Entities.AdminPanelPage.NotesPage, Model.Alert);
+}
+
+<div class="w3-white w3-round w3-margin-bottom w3-border">
+  <header class="w3-padding-large w3-large w3-border-bottom">@Model.Code Note Files</header>
+  <div class="w3-padding-large">
+    <div class="w3-flex">
+      <form method="post" asp-page-handler="Upload" enctype="multipart/form-data" class="w3-container">
+        <div class="w3-section">
+          <div class="w3-margin-bottom">
+            <input type="hidden" asp-for="NoteId" />
+            <input type="hidden" asp-for="Code" />
+            <label asp-for="UploadFiles" class="w3-large"></label>
+            <input asp-for=UploadFiles type="file" accept=".jpg,.jpeg,.png,.gif" multiple />
+          </div>
+          <div class="w3-margin-bottom">
+            <button type="submit" title="Upload" class="w3-button w3-danger w3-round"><i class="fa fa-fw fa-upload"></i>Upload</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="w3-responsive">
+      <table class="w3-table w3-bordered w3-center">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var item in Model.FileList)
+          {
+            <tr>
+              <td>@Html.DisplayFor(modelItem => item.Name)</td>
+              <td>
+                <form method="post" asp-route-id="@item.Id" asp-page-handler="Delete" onsubmit="return confirm('Are you sure?');">
+                  <button type="submit" title="Delete" class="w3-button w3-danger w3-round w3-small"><i class="fa fa-fw fa-trash"></i></button>
+                </form>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

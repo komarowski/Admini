@@ -1,0 +1,29 @@
+﻿@page
+@model AdminiBackend.Pages.Panel.Tags.EditModel
+
+@{
+  ViewData["LayoutViewData"] = new Entities.LayoutViewData("Edit tag", Entities.AdminPanelPage.TagsPage);
+}
+
+<div class="w3-white w3-round w3-margin-bottom w3-border">
+  <header class="w3-padding-large w3-large w3-border-bottom">Edit Tag</header>
+  <div class="w3-padding-large">
+    <form method="post" class="w3-container">
+      <div class="w3-section">
+        <input type="hidden" asp-for="EditTag.Id" />
+        <input type="hidden" asp-for="EditTag.UserId" />
+        <div class="w3-margin-bottom">
+          <label asp-for="EditTag.Number" class="w3-large"></label>
+          <input asp-for="EditTag.Number" class="w3-input w3-border w3-round" required />
+        </div>
+        <div class="w3-margin-bottom">
+          <label asp-for="EditTag.Title" class="w3-large"></label>
+          <input asp-for="EditTag.Title" class="w3-input w3-border w3-round" required />
+        </div>
+        <div class="w3-margin-bottom">
+          <button type="submit" class="w3-button w3-primary w3-round">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+﻿@page
+@model AdminiBackend.Pages.Panel.Notes.IndexModel
+
+@{
+  ViewData["LayoutViewData"] = new Entities.LayoutViewData("Notes", Entities.AdminPanelPage.NotesPage, Model.Alert);
+}
+
+<div class="w3-white w3-round w3-margin-bottom w3-border">
+  <header class="w3-padding-large w3-large w3-border-bottom">Notes</header>
+  <div class="w3-padding-large">
+    <div class="w3-flex w3-flex-end w3-margin-bottom">
+      <a asp-page="Create" title="Create new note" class="w3-button w3-primary w3-round w3-margin-right">Create</a>
+      <button title="Upload" class="w3-button w3-primary w3-round w3-margin-right" onclick="document.getElementById('uploadModal').style.display='block'">
+        <i class="fa fa-fw fa-upload"></i> Upload
+      </button>
+      <form method="post" asp-page-handler="Download" onsubmit="return confirm('Are you sure?');">
+        <button type="submit" title="Download" class="w3-button w3-primary w3-round"><i class="fa fa-fw fa-download"></i>Download</button>
+      </form>
+    </div>
+    <div class="w3-responsive">
+      <table class="w3-table w3-bordered w3-center">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Title</th>
+            <th>Is mark</th>
+            <th>LastUpdate</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.NoteList) 
+        {
+          <tr>
+            <td>@Html.DisplayFor(modelItem => item.Code)</td>
+            <td>@Html.DisplayFor(modelItem => item.Title)</td>
+            <td>@Html.DisplayFor(modelItem => item.IsMark)</td>
+            <td>@Html.DisplayFor(modelItem => item.LastUpdate)</td>
+            <td style="display:flex;justify-content:center;">
+              <a asp-page="./Edit" asp-route-id="@item.Id" title="Edit note" class="w3-button w3-warning w3-round w3-small w3-margin-right">
+                <i class="fa fa-fw fa-pencil"></i>
+              </a>
+              <a asp-page="./Content" asp-route-id="@item.Id" title="Edit note content" class="w3-button w3-secondary w3-round w3-small w3-margin-right">
+                <i class="fa fa-fw fa-sticky-note"></i>
+              </a>
+              <a asp-page="./File" asp-route-id="@item.Id" title="Manage note files" class="w3-button w3-warning w3-round w3-small w3-margin-right">
+                <i class="fa fa-fw fa-file-photo-o"></i>
+              </a>
+              @if (item.Code != "index")
+              {
+                <form method="post" asp-route-id="@item.Id" asp-page-handler="Delete" title="Delete note" onsubmit="return confirm('Are you sure?');">
+                  <button type="submit" title="Delete" class="w3-button w3-danger w3-round w3-small"><i class="fa fa-fw fa-trash"></i></button>
+                </form>
+              }
+            </td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="uploadModal" class="w3-modal">
+  <div class="w3-modal-content w3-round w3-card-4 w3-animate-zoom" style="max-width:600px">
+    <header class="w3-container w3-teal">
+      <span class="w3-button w3-round w3-large w3-hover-red w3-display-topright" title="Close Modal" onclick="document.getElementById('uploadModal').style.display='none'">
+        &times;
+      </span>
+      <h4>Upload Files</h4>
+    </header>
+    <form method="post" asp-page-handler="Upload" enctype="multipart/form-data" class="w3-container">
+      <div class="w3-section">
+        <div class="w3-margin-bottom">
+          <label asp-for="UploadZip" class="w3-large"></label>
+          <input asp-for=UploadZip type="file" accept=".zip,.rar,.7zip" />
+        </div>
+        <div class="w3-margin-bottom">
+          <button type="submit" title="Upload" class="w3-button w3-danger w3-round"><i class="fa fa-fw fa-upload"></i>Upload</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

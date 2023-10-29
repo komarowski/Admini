@@ -1,0 +1,56 @@
+﻿@page
+@model AdminiBackend.Pages.Panel.Notes.ContentModel
+
+@{
+  ViewData["LayoutViewData"] = new Entities.LayoutViewData(
+    "Note content", 
+    Entities.AdminPanelPage.NotesPage,
+    new string[1] { "simplemde.css" },
+    new string[2] { "simplemde.js", "contentpage.js" }
+  );
+}
+
+<form method="post">
+  <input type="hidden" asp-for="Code" />
+  <input type="hidden" asp-for="NoteContent.Id" />
+  <input type="hidden" asp-for="NoteContent.NoteId" />
+  <h4>@Model.Title - @Model.Code</h4>
+  <textarea id="simplemde" asp-for="NoteContent.Content" class="w3-input w3-border w3-round" rows="20"></textarea>
+  <button type="submit" class="w3-button w3-primary w3-round">Save</button>
+</form>
+
+<div id="imageModal" class="w3-modal">
+  <div class="w3-modal-content w3-round w3-card-4 w3-animate-zoom" style="max-width:600px">
+    <header class="w3-container w3-teal">
+      <span class="w3-button w3-round w3-large w3-hover-red w3-display-topright" title="Close Modal" onclick="document.getElementById('imageModal').style.display='none'">
+        &times;
+      </span>
+      <h4>Note files</h4>
+    </header>
+    <div class="w3-container">
+      <div class="w3-responsive">
+        <table class="w3-table w3-bordered w3-center">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Past image</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach (var item in Model.NoteFiles)
+            {
+              <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>
+                  <button title="Paste" class="w3-button w3-warning w3-round w3-small btn-paste" data-url="@item.FullName">
+                    <i class="fa fa-fw fa-pencil"></i>
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

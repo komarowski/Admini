@@ -1,0 +1,19 @@
+﻿@page
+@model ErrorModel
+@{
+  ViewData["LayoutViewData"] = new Entities.LayoutViewData("Error");
+}
+
+<div class="w3-white w3-round w3-margin-bottom w3-border">
+  <header class="w3-padding-large w3-large w3-border-bottom">Error</header>
+  <div class="w3-padding-large">
+    <h3>An unhandled error occurred while processing your request.</h3>
+    @if (Model.ShowRequestId)
+    {
+      <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+      </p>
+    }
+    <p></p>
+  </div>
+</div>

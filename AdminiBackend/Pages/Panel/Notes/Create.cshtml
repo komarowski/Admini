@@ -1,0 +1,72 @@
+﻿@page
+@model AdminiBackend.Pages.Panel.Notes.CreateModel
+
+@{
+  ViewData["LayoutViewData"] = new Entities.LayoutViewData(
+    "Create note", 
+    Entities.AdminPanelPage.NotesPage,
+    null,
+    new string[1] { "editnotepage.js" }
+  );
+}
+
+<div class="w3-white w3-round w3-margin-bottom w3-border">
+  <header class="w3-padding-large w3-large w3-border-bottom">Create Note</header>
+  <div class="w3-padding-large">
+    <form method="post" class="w3-container">
+      <div class="w3-section">
+        <div class="w3-margin-bottom">
+          <label asp-for="NewNote.Code" class="w3-large"></label>
+          <input asp-for="NewNote.Code" class="w3-input w3-border w3-round" minlength="4" maxlength="35" autocomplete="off" required />
+        </div>
+        <div class="w3-margin-bottom">
+          <label asp-for="NewNote.Title" class="w3-large"></label>
+          <input asp-for="NewNote.Title" class="w3-input w3-border w3-round" minlength="4" maxlength="50" autocomplete="off" required />
+        </div>
+        <div class="w3-margin-bottom">
+          <label asp-for="NewNote.Description" class="w3-large"></label>
+          <textarea asp-for="NewNote.Description" class="w3-input w3-border w3-round" rows="3" style="resize: none" maxlength="200"></textarea>
+        </div>
+        <input type="hidden" asp-for="NewNote.UserId" />
+        <input id="tags" type="hidden" asp-for="NewNote.Tags" />
+        <div class="w3-margin-bottom">
+          <label asp-for="NewNote.Tags" class="w3-large"></label>
+          @{
+            foreach (var tag in Model.TagList)
+            {
+              <div class="w3-margin-bottom">
+                <label>
+                  <input type="checkbox" class="w3-check" value="@tag.Number" onchange="updateTagsSum(this)"> @tag.Title
+                </label>
+              </div>
+            }
+            <div class="w3-margin-bottom">
+              <button type="button" class="w3-button w3-primary w3-round w3-small" onclick="clearTags()">Clear tags</button>
+            </div>
+          }
+        </div>
+        <div class="w3-margin-bottom">
+          <label asp-for="NewNote.IsMark" class="w3-large"></label><br />
+          <label>
+            <input asp-for="NewNote.IsMark" type="checkbox" class="w3-check"> There is a mark on the map?
+          </label>
+        </div>
+        <div class="w3-margin-bottom">
+          <label asp-for="NewNote.Latitude" class="w3-large"></label>
+          <input asp-for="NewNote.Latitude" class="w3-input w3-border w3-round" />
+        </div>
+        <div class="w3-margin-bottom">
+          <label asp-for="NewNote.Longitude" class="w3-large"></label>
+          <input asp-for="NewNote.Longitude" class="w3-input w3-border w3-round" />
+        </div>
+        <div class="w3-margin-bottom">
+          <label asp-for="NewNote.LastUpdate" class="w3-large"></label>
+          <input asp-for="NewNote.LastUpdate" type="date" class="w3-input w3-border w3-round" />
+        </div>
+        <div class="w3-margin-bottom">
+          <button type="submit" class="w3-button w3-primary w3-round">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

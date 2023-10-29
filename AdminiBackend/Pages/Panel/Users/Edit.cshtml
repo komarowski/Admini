@@ -1,0 +1,32 @@
+﻿@page
+@model AdminiBackend.Pages.Panel.Users.EditModel
+
+@{
+  ViewData["LayoutViewData"] = new Entities.LayoutViewData("Edit user", Entities.AdminPanelPage.UsersPage);
+}
+
+<div class="w3-white w3-round w3-margin-bottom w3-border">
+  <header class="w3-padding-large w3-large w3-border-bottom">Edit User</header>
+  <div class="w3-padding-large">
+    <form method="post" class="w3-container">
+      <div class="w3-section">
+        <input type="hidden" asp-for="EditUser.Id" />
+        <div class="w3-margin-bottom">
+          <label asp-for="EditUser.Name" class="w3-large"></label>
+          <input asp-for="EditUser.Name" class="w3-input w3-border w3-round" minlength="5" maxlength="30" autocomplete="off" required />
+        </div>
+        <div class="w3-margin-bottom">
+          <label asp-for="EditUser.Password" class="w3-large"></label>
+          <input asp-for="EditUser.Password" class="w3-input w3-border w3-round" minlength="4" maxlength="40" required />
+        </div>
+        <div class="w3-margin-bottom">
+          <label asp-for="EditUser.Role" class="w3-large"></label>
+          <input asp-for="EditUser.Role" class="w3-input w3-border w3-round" />
+        </div>
+        <div class="w3-margin-bottom">
+          <button type="submit" class="w3-button w3-primary w3-round">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
