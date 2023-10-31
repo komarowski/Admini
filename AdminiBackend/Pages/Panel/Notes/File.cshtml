@@ -17,7 +17,7 @@
             <input asp-for=UploadFiles type="file" accept=".jpg,.jpeg,.png,.gif" multiple />
           </div>
           <div class="w3-margin-bottom">
-            <button type="submit" title="Upload" class="w3-button w3-danger w3-round"><i class="fa fa-fw fa-upload"></i>Upload</button>
+            <button type="submit" title="Upload" class="w3-button w3-primary w3-round"><i class="fa fa-fw fa-upload"></i>Upload</button>
           </div>
         </div>
       </form>
@@ -37,6 +37,7 @@
               <td>@Html.DisplayFor(modelItem => item.Name)</td>
               <td>
                 <form method="post" asp-route-id="@item.Id" asp-page-handler="Delete" onsubmit="return confirm('Are you sure?');">
+                  <input type="hidden" asp-for="NoteId" />
                   <button type="submit" title="Delete" class="w3-button w3-danger w3-round w3-small"><i class="fa fa-fw fa-trash"></i></button>
                 </form>
               </td>

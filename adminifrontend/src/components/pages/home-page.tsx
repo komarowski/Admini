@@ -71,6 +71,7 @@ const HomePage: React.FunctionComponent = () => {
       <main className="w4-main">
         <div ref={WidgetSearchRef} className="w4-section w4-section--search">
           <WidgetSearch 
+            noteCode={noteCode} 
             setNoteTab={setTab} 
             searchParams={searchParams}
             setSearchParams={setSearchParams}
@@ -87,6 +88,7 @@ const HomePage: React.FunctionComponent = () => {
         <div ref={WidgetMapRef} className="w4-section w4-section--map">
           <WidgetMap 
             note={note} 
+            noteCode={noteCode} 
             setNoteTab={setTab} 
             searchParams={searchParams}
             setSearchParams={setSearchParams}

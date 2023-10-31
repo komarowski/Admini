@@ -9,6 +9,8 @@ AdminiBackend/wwwroot/*
 !AdminiBackend/wwwroot/admin-assets
 
 *.txt
+*.zip
+
 
 # User-specific files
 *.rsuser

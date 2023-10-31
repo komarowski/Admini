@@ -23,8 +23,8 @@
           <tr>
             <th>Code</th>
             <th>Title</th>
-            <th>Is mark</th>
-            <th>LastUpdate</th>
+            <th>Is mark?</th>
+            <th>Last update</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -35,7 +35,12 @@
             <td>@Html.DisplayFor(modelItem => item.Code)</td>
             <td>@Html.DisplayFor(modelItem => item.Title)</td>
             <td>@Html.DisplayFor(modelItem => item.IsMark)</td>
-            <td>@Html.DisplayFor(modelItem => item.LastUpdate)</td>
+            <td>
+                @if (item.LastUpdate.HasValue)
+                {
+                  @Convert.ToDateTime(item.LastUpdate).ToString("d MMM yyyy", new System.Globalization.CultureInfo("en-US"))
+                }
+            </td>
             <td style="display:flex;justify-content:center;">
               <a asp-page="./Edit" asp-route-id="@item.Id" title="Edit note" class="w3-button w3-warning w3-round w3-small w3-margin-right">
                 <i class="fa fa-fw fa-pencil"></i>

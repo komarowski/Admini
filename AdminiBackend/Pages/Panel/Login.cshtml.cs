@@ -43,7 +43,7 @@ namespace AdminiBackend.Pages.Panel
       {
         return RedirectToPage(new { alert = AlertType.Error, text = $"User not found." });
       }
-      logger.LogWarning("Sign in '{user.Name}' user", user.Name);
+      logger.LogWarning("Sign in '{0}' user", user.Name);
       return RedirectToPage("/Panel/Notes/Index");
     }
   }

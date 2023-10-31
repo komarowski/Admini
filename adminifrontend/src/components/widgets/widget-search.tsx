@@ -39,6 +39,7 @@ const getUnselectedTags = (tagArray: Array<ITagDTO>, tagsNumber: number): Array<
 };
 
 interface IProps {
+  noteCode: string;
   setNoteTab: (tab: string) => void;
   searchParams: URLSearchParams;
   setSearchParams: SetURLSearchParams;
@@ -47,7 +48,7 @@ interface IProps {
 }
 
 const WidgetSearch: React.FunctionComponent<IProps> = (props) => {
-  const { setNoteTab, searchParams, setSearchParams, tagArray, user } = props;
+  const { noteCode, setNoteTab, searchParams, setSearchParams, tagArray, user } = props;
 
   const isIndex = window.location.pathname === "/";
   const [searchQuery, setSearchQuery] = useState(searchParams.get(URLParams.SEARCHQUERY) || '');
@@ -117,6 +118,7 @@ const WidgetSearch: React.FunctionComponent<IProps> = (props) => {
       </div>
       <div className="w4-widget__body w4-container w4-theme-text">
         <NoteList 
+          currentNoteCode={noteCode}
           searchResult={searchResult}
           handleNoteClick={handleNoteClick}
         />

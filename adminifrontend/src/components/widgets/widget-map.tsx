@@ -49,6 +49,7 @@ const usePopupDisplay = (propsValue: INoteDTO | null | undefined): [string, Reac
 
 interface IProps {
   note: INoteDTO | null | undefined;
+  noteCode: string;
   setNoteTab: (tab: string) => void;
   searchParams: URLSearchParams;
   setSearchParams: SetURLSearchParams;
@@ -56,7 +57,7 @@ interface IProps {
 }
 
 const WidgetMap: React.FunctionComponent<IProps> = (props) => {
-  const {setNoteTab, note, searchParams, setSearchParams, user} = props;
+  const {setNoteTab, note, noteCode, searchParams, setSearchParams, user} = props;
 
   const [mapStateCache, setMapStateCache] = useLocalStorage<IMapState>(
     LocalStorageParams.MAPSTATE,
@@ -70,7 +71,7 @@ const WidgetMap: React.FunctionComponent<IProps> = (props) => {
   const [selectedNote, setSelectedNote] = useSelectedNote<INoteDTO | null | undefined>(note);
   const [popupDisplay, setPopupDisplay] = usePopupDisplay(note);
   const center = getCenter(note);
-  const noteCode = searchParams.get(URLParams.NOTECODE);
+  //const noteCode = searchParams.get(URLParams.NOTECODE);
   
   const handleMarkerClick = (marker: INoteDTO) => {
     setSelectedNote(marker);
