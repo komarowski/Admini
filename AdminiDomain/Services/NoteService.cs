@@ -110,11 +110,15 @@ namespace AdminiDomain.Services
         contextQuery = contextQuery.Where(x => (x.note.Tags & tags) == tags);
       }
 
-      contextQuery = string.IsNullOrEmpty(query)
-        ? contextQuery.OrderByDescending(x => x.note.LastUpdate).Take(20)
-        : contextQuery.Where(x => x.note.Title.ToLower().Contains(query));
+      if (!string.IsNullOrEmpty(query))
+      {
+        contextQuery = contextQuery.Where(x => x.note.Title.ToLower().Contains(query));
+      }
 
-      return await contextQuery.Select(x => x.note).ToArrayAsync();
+      return await contextQuery
+        .OrderByDescending(x => x.note.LastUpdate)
+        .Select(x => x.note)
+        .ToArrayAsync();
     }
 
     /// <summary>

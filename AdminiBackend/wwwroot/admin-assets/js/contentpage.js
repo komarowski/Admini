@@ -54,10 +54,38 @@
 		]
 });
 
-const buttons = document.getElementsByClassName("btn-paste");
-for (let i = 0; i < buttons.length; i++) {
-	buttons[i].addEventListener("click", function () {
-		const image = `<p><img src="${buttons[i].dataset.url}" alt="" title=""></p>`;
-		simplemde.value(simplemde.value() + '\n' + image);
-	});
+const generateSlider = (imageArray) => {
+	let result = '<div class="w4-slider">';
+
+	imageArray.forEach((image) => {
+		result += `\n<div class="w4-slide">
+  <img src="${image}" alt="" title="">
+  <span></span>
+</div>`;
+	})
+
+	if (imageArray.length !== 1) {
+		result += `\n<button class="w4-button-slider w4-button-slider--prev"> < </button>
+<button class="w4-button-slider w4-button-slider--next"> > </button>`;
+	}
+	result += '\n</div>';
+	return result;
+}
+
+const btnPaste = document.getElementById("btn-paste");
+if (btnPaste) {
+	btnPaste.onclick = () => {
+		let imageArray = [];
+		const checkboxes = document.querySelectorAll(".image-checkbox");
+		checkboxes.forEach((element) => {
+			if (element.checked) {
+				imageArray.push(element.value);
+			}
+		})
+
+		if (imageArray.length >= 1) {
+			const silderHtml = generateSlider(imageArray);
+			simplemde.value(simplemde.value() + '\n\n' + silderHtml);
+		}
+	}
 }

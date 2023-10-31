@@ -4,6 +4,7 @@
 
 ## Demo
 
+![](https://github.com/komarowski/Admini/blob/main/images/demo.gif)
 
 ## Description
 

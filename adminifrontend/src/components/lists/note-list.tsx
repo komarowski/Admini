@@ -4,15 +4,22 @@ import { getFormatDateString } from '../../utils';
 
 
 interface IProps {
+  currentNoteCode: string;
   searchResult: Array<INoteDTO>;
   handleNoteClick: (code: string) => void;
 }
 
 const NoteList: React.FunctionComponent<IProps> = (props) => {
+  const { currentNoteCode, searchResult, handleNoteClick } = props;
+
   return (
     <>
-      {props.searchResult.map(note => (
-        <div key={note.code} className="w4-search-result" onClick={() => props.handleNoteClick(note.code)}>
+      {searchResult.map(note => (
+        <div 
+          key={note.code} 
+          className={note.code === currentNoteCode ? "w4-search-result w4-search-result--current" : "w4-search-result"} 
+          onClick={() => handleNoteClick(note.code)}
+        >
           <div className="w4-flex">
             <span className="w4-dot" />
             <h2>{note.title}</h2>

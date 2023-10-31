@@ -131,6 +131,13 @@ namespace AdminiDomain.Services
       return Path.Combine(FileService.RootFolder, zipName);
     }
 
+    private static string? TrimString(string? text, int maxLength)
+    {
+      return (!string.IsNullOrEmpty(text) && text.Length > maxLength) 
+        ? text[..maxLength] 
+        : text;
+    }
+
     /// <summary>
     /// Gets <see cref="ImportNote"/> from zip archive folder.
     /// </summary>
@@ -157,9 +164,9 @@ namespace AdminiDomain.Services
       var noteCode = string.IsNullOrEmpty(markdownFrontMatter.Code) ? NoteService.GetNewCode() : markdownFrontMatter.Code;
       var note = new Note()
       {
-        Title = markdownFrontMatter.Title,
-        Code = noteCode,
-        Description = markdownFrontMatter.Description,
+        Title = TrimString(markdownFrontMatter.Title, 50)!,
+        Code = TrimString(noteCode, 35)!,
+        Description = TrimString(markdownFrontMatter.Description, 200),
         Tags = markdownFrontMatter.Tags,
         UserId = userId,
         IsMark = markdownFrontMatter.IsMark,
